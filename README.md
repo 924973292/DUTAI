@@ -5,19 +5,11 @@
 <br>
 
 <p align="center">
-  <a href="https://924973292.github.io/DUTAI/" style="text-decoration: none; color: inherit;">
-    <!-- 这里是新的SVG火箭图标 -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="60" height="60">
-      <path fill="#FF4500" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-      <path fill="#FFD700" d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7v-2z"/>
-      <path fill="#FF6347" d="M12 1.5c-5.79 0-10.5 4.71-10.5 10.5S6.21 22.5 12 22.5 22.5 17.79 22.5 12 17.79 1.5 12 1.5zm0 1.5c4.96 0 9 4.04 9 9s-4.04 9-9 9-9-4.04-9-9 4.04-9 9-9zm-1 4h2v5h-2v-5zm0 6h2v2h-2v-2z"/>
-      <path fill="none" stroke="#FFFFFF" stroke-width="0.5" d="M15.5 12c0-1.5-1-2.8-2.5-3.5l.5-2.5-1.5-1-1 3c-1.5.7-2.5 2-2.5 3.5s1 2.8 2.5 3.5l1 3 1.5-1-.5-2.5c1.5-.7 2.5-2 2.5-3.5z"/>
-      <path fill="#FF8C00" d="M9 19c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-3H9v3z"/>
-      <path fill="#FFFFFF" d="M12 4l-3 4h6l-3-4z"/>
-    </svg>
+  <a href="https://924973292.github.io/DUTAI/">
+    <!-- 已经替换为有效的、颜色鲜艳的线上火箭图标 -->
+    <img src="https://www.svgrepo.com/show/474453/rocket.svg" alt="Launch Project" width="60" />
     <br>
-    <!-- 使用 <h4> 标签来放大文字，并添加 text-align: center 使其居中 -->
-    <h4 style="color: #4A90E2; margin-top: 10px;">点击进入项目主页</h4>
+    <img src="https://img.shields.io/badge/-%E7%82%B9%E5%87%BB%E8%BF%9B%E5%85%A5%E9%A1%B9%E7%9B%AE%E4%B8%BB%E9%A1%B5-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyTDIgMjFsMTAtNGwxMC0xOFoiLz48cGF0aCBkPSJNMjIgMmwtMTEgOWwxMS05eiIvPjwvc3ZnPg==" alt="点击进入项目主页">
   </a>
 </p>
 
