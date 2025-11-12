@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>针对于人工智能学生 - 大连理工大学人工智能入门计划</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 内嵌CSS - 与path-planning.html保持一致 */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2a6f97;
+            --accent-color: #f97316;
+            --text-color: #333333;
+            --light-gray: #f3f4f6;
+            --medium-gray: #e5e7eb;
+            --dark-gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #b8bbbe;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-scrolled {
+            background-color: rgba(128, 129, 131, 0.95);
+            padding: 0.8rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 移动端菜单 */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu li {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            display: flex;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 300px;
+            padding-right: 2rem;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .profile-title {
+            color: var(--dark-gray);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            text-align: left;
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-item i {
+            margin-right: 0.8rem;
+            color: var(--secondary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .toc {
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .toc h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.3rem 0;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover,
+        .toc-link.active {
+            color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        /* 内容区域样式 */
+        .content {
+            flex: 1;
+            padding-left: 2rem;
+            border-left: 1px solid var(--medium-gray);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .section-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding-right: 0;
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .content {
+                padding-left: 0;
+                border-left: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .mobile-menu.hidden {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-name {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .section-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<script>
+    // 内嵌JavaScript
+    document.addEventListener('DOMContentLoaded', function () {
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 目录导航激活状态
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', function () {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+</script>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="index.html" class="logo">大连理工大学人工智能入门计划</a>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">计划背景</a></li>
+
+                    <li><a href="./beginner-guide.html">学习路径</a></li>
+                    <li><a href="path-planning.html">知识导图</a></li>
+                    <li><a href="./results.html">课后作业</a></li>
+                    <li><a href="./previous.html">往期资料</a></li>
+                </ul>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+            <ul class="mobile-menu" id="mobile-menu">
+                <li><a href="index.html#about">计划背景</a></li>
+
+                <li><a href="path-planning.html">知识导图</a></li>
+                <li><a href="./beginner-guide.html">学习路径</a></li>
+                <li><a href="./results.html">课后作业</a></li>
+                <li><a href="./previous.html">往期资料</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <div class="container">
+        <div class="main-content">
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <div class="profile">
+                    <img src=img1/logo.png
+                        alt="个人照片" class="profile-image">
+                    <h2 class="profile-name">大连理工大学人工智能入门计划负责人</h2>
+                    <p class="profile-title">大连理工大学人工智能入门计划</p>
+                </div>
+
+                <div class="contact-info">
+                    <h3>联系信息</h3>
+                    <div class="contact-item">
+                        <a href="mailto:research@example.com">X X X </a>
+                    </div>
+                    <div class="contact-item">
+                        <span>联系电话：<br>18018930609</span>
+                    </div>
+                    <div class="contact-item">
+                        <a href="" target="_blank">X X X</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>联系电话：<br>18804265475</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content">
+                <!-- 标题和介绍 -->
+                <section id="introduction" class="section">
+                    <h1 class="section-title">针对于人工智能学生</h1>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <h2
+                                style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                                大连理工大学 — 人工智能（AI）详细入门学习路径</h2>
+
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                <strong>目标读者：</strong>具备基本 Python 能力，欲在 3–4 个月内完成系统入门并通过两阶段验收（深度学习验收 + 专项验收）。
+                            </p>
+
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本文档严格依托并映射原始导图《大连理工大学人工智能研究生入门学习指南》中的知识点与资源（数学基础、机器学习、深度学习与各方向要点）。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 概览 -->
+                <section id="overview" class="section">
+                    <h2 class="section-title">概览（快速导航）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                            <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>入门导引（环境与首个端到端工程）</strong> — 1 周
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>数学基础（线性代数/多元微积分/概率/信息论/优化/多元统计）</strong> — 2–3 周
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>机器学习核心（监督/无监督/评估/经典模型）</strong> — 3 周
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>深度学习（神经网络/训练技巧/CNN/RNN/Transformer/无监督）</strong> — 4–6 周
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>阶段性验收 I（深度学习验收）：</strong>深度学习综合项目（必须通过）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>专项方向（计算机视觉 / 3D / 生成式 AI & LLM / 强化学习）</strong> — 4 周
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>阶段性验收 II（专项验收）：</strong>方向项目（终验收）
+                                </li>
+                                <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>持续学习：</strong>顶会/论文/复现（长期）
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div
+                            style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #ffa500;">
+                            <h3
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                使用说明（站点顶部显示）</h3>
+                            <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                    每个阶段包含：目标、核心知识点（映射自原始导图）、必做练习、推荐资源、阶段项目与验收要求。
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                    提交格式：Notebook（Colab 优先）、代码仓库（GitHub）、报告（Markdown/PDF）、演示（GIF/视频）
+                                </li>
+                                <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                    工具：Python 3.8+、Jupyter/Colab、PyTorch（优先）、scikit-learn、NumPy、Pandas、Matplotlib、Git
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段0：入门导引 -->
+                <section id="stage0" class="section">
+                    <h2 class="section-title">阶段 0：入门导引（1 周）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <h3
+                                style="font-size: 1.3rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                                阶段 0：入门导引（1 周）</h3>
+
+                            <p style="margin-bottom: 1rem; line-height: 1.8;">
+                                <strong>目标：</strong>搭建环境、理解 AI 分支与基本任务、完成首个端到端小实验
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                核心要点（映射自导图）：</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    AI 的分支（机器学习、深度学习、计算机视觉、自然语言处理、强化学习）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    项目流程（数据→模型→评估→部署）
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                必做练习：</h4>
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                房价预测（线性回归，scikit-learn，含数据可视化与 MSE）
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                验收项：</h4>
+                            <p style="margin-bottom: 0; line-height: 1.8;">
+                                可运行 Colab Notebook + README
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段1：数学基础 -->
+                <section id="stage1" class="section">
+                    <h2 class="section-title">阶段 1：数学基础（2–3 周）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本阶段严格对应原始导图"人工智能的数学基础"条目：线性代数、微积分、概率与贝叶斯、信息论、最优化、多元统计（条目逐条映射与练习）。
+                            </p>
+
+                            <!-- 1.1 线性代数 -->
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    1.1 线性代数（1 周）</h3>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>核心知识点：</strong>线性空间、子空间、基与秩、正交、投影、线性变换、特征值/特征向量、谱分解、SVD、LU/QR 分解
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>NumPy 实现 SVD → PCA
+                                    可视化；线性回归闭式解与梯度下降对比</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 线性空间与子空间：</strong>线性空间（向量加法、数乘）、子空间（列空间、行空间、零空间）、基与维数、线性相关与秩
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 正交结构与投影：</strong>内积、范数、Gram–Schmidt 正交化、正交投影、最小二乘法。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 线性变换与矩阵表示：</strong>线性变换、矩阵表示、基变换、相似变换、核与像、条件数。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 谱分解与矩阵性质：</strong>特征值与特征向量、对称矩阵（谱定理）、正定矩阵、二次型。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 矩阵分解：</strong>LU 分解、QR 分解、奇异值分解 (SVD)、Kronecker 与 Hadamard 积。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>《Linear Algebra Done Right》
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 视频：</strong>3Blue1Brown 线性代数本质系列
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>《Linear Algebra and Learning from Data》
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>《Numerical Linear Algebra》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- 1.2 多元微积分 -->
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    1.2 多元微积分（0.5 周）</h3>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>核心知识点：</strong>偏导、梯度、Jacobian、Hessian、链式法则、泰勒展开、凸函数
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>梯度下降二维可视化，牛顿法对比</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 多元函数与可微结构：</strong>多元函数、复合函数、偏导数、可微性、方向导数。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 梯度、Jacobian 与 Hessian：</strong>梯度（最速下降）、Jacobian 矩阵、Hessian
+                                        矩阵（局部曲率、鞍点）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 多元泰勒展开：</strong>一阶与二阶局部逼近（梯度下降与牛顿法基础）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 凸函数：</strong>定义、一阶/二阶条件、局部极小即全局极小。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 泛函分析：</strong>泛函、Hilbert 空间（核方法基础）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 视频：</strong>多元函数可视化 (Khan Academy)
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>《Numerical Optimization》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- 1.3 概率与贝叶斯 -->
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    1.3 概率与贝叶斯（0.5 周）</h3>
+                                <p style="margin-bottom: 0.8rem;"><strong>核心知识点：</strong>Kolmogorov
+                                    公理、条件概率、贝叶斯定理、随机变量、常见分布、MLE/MAP</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>贝叶斯更新练习、参数估计模拟</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 概率体系：</strong>Kolmogorov 公理、条件概率、全概率公式、贝叶斯公式。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 随机变量与联合结构：</strong>PMF/PDF/CDF、联合分布、边缘分布、条件分布、独立性与条件独立性。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 期望、方差与协方差：</strong>期望、方差、协方差、协方差矩阵。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 常见分布与参数估计：</strong>高斯、伯努利、指数族、最大似然估计 (MLE)、最大后验估计
+                                        (MAP)、共轭先验、贝叶斯推断。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>普林斯顿概率论读本
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 视频：</strong>随机变量概念解析 (Khan Academy)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- 1.4 信息论与熵 -->
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    1.4 信息论与熵（穿插）</h3>
+                                <p style="margin-bottom: 0.8rem;"><strong>核心知识点：</strong>熵、交叉熵、KL 散度、互信息</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>交叉熵在分类损失中的使用与数值对比</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 熵与信息量：</strong>香农熵（不确定性度量）、联合熵、条件熵。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 信息度量与散度：</strong>交叉熵（分类损失）、KL 散度（分布差异）、互信息 (I(X;Y))、数据处理不等式。
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 文章：</strong>通俗理解信息熵、条件熵与信息增益
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- 1.5 最优化理论与正则化 -->
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    1.5 最优化理论与正则化（穿插）</h3>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>核心知识点：</strong>凸优化、梯度下降族（SGD/Adam）、二阶方法、正则化（L1/L2）、早停
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>比较不同优化器、实施 L1/L2 与早停观察泛化</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 优化问题与凸结构：</strong>凸优化、拉格朗日乘子法、KKT 条件。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 基于梯度的一阶优化：</strong>梯度下降、动量法、Nesterov 加速梯度 (NAG)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 自适应一阶方法：</strong>AdaGrad、RMSProp、Adam。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 二阶与拟牛顿法：</strong>Newton 法、BFGS 与 L-BFGS。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 正则化与泛化：</strong>L1 正则化（稀疏性）、L2 正则化（权重衰减）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 文章：</strong>梯度下降算法总结 (ruder.io)
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>《Adam: A Method for Stochastic Optimization》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- 1.6 多元统计分析 -->
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    1.6 多元统计分析（穿插）</h3>
+                                <p style="margin-bottom: 0.8rem;"><strong>核心知识点：</strong>PCA、LDA、ICA、t-SNE、UMAP</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>PCA 与 t-SNE 在同数据集上的可视化对比</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 线性降维：</strong>主成分分析 (PCA)、线性判别分析 (LDA)、典型相关分析 (CCA)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 独立性与信号分离：</strong>独立成分分析 (ICA) 及其与 PCA 的区别。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 非线性降维：</strong>t-SNE、UMAP（流形学习）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 文章：</strong>PCA 算法详解
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>《Visualizing Data using t-SNE》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    阶段项目（数学验收）：</h3>
+                                <p style="margin-bottom: 0; line-height: 1.8;">
+                                    PCA + 线性回归 pipeline（Notebook + 300 字理解总结）
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段2：机器学习基础 -->
+                <section id="stage2" class="section">
+                    <h2 class="section-title">阶段 2：机器学习基础（3 周）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                对应导图中"第二阶段：机器学习与深度学习核心"的机器学习部分。重点掌握评估、模型选择与常见算法。
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                内容要点</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    机器学习基本概念（监督/无监督、泛化误差、交叉验证）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    性能度量（MSE、Accuracy、Precision/Recall、ROC-AUC、F1）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    经典线性模型（线性回归、逻辑回归、GLM）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    决策树、随机森林、SVM、KNN、K-Means、特征工程
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                练习与项目</h4>
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                scikit-learn 实验套件：在 2–3 个数据集上比较算法，写实验报告
+                            </p>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    2.1 机器学习基本概念</h4>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 核心定义：</strong>监督学习（分类、回归）、无监督学习（聚类、密度估计）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 泛化与误差：</strong>泛化误差、经验误差、过拟合与欠拟合。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 评估方法：</strong>留出法、k-折交叉验证法、自助法。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 性能度量：</strong>均方误差、错误率/精度、查准率/查全率、ROC-AUC 曲线、F1 分数。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>周志华《机器学习》
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 视频：</strong>Andrew Ng《Machine Learning》课程
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    2.2 经典线性模型</h4>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 线性回归：</strong>回归误差、均方和误差、最小二乘法（闭式解与梯度下降法）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 广义线性模型 (GLM)：</strong>线性的含义（对参数空间）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 逻辑斯蒂回归：</strong>Sigmoid 函数、概率解释、多分类（Softmax 回归）、交叉熵损失。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>《Introduction to Statistical Learning》
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>《Pattern Recognition and Machine Learning》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    阶段项目（机器学习验收）：</h3>
+                                <p style="margin-bottom: 0; line-height: 1.8;">
+                                    端到端应用（数据预处理→特征工程→模型比较→交叉验证）
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段3：深度学习 -->
+                <section id="stage3" class="section">
+                    <h2 class="section-title">阶段 3：深度学习（4–6 周） — 阶段性验收 I（深度学习）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本阶段覆盖导图中"神经网络、反向传播、训练技巧、CNN、RNN、Transformer、无监督深度学习"等条目。每项条目在本阶段都应至少有理论理解与实操实现。完成此阶段为进入专项方向的必需条件。
+                            </p>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    3.1 PyTorch 基础与训练流水线</h3>
+                                <p style="margin-bottom: 0.8rem;">Tensor、Dataset、DataLoader、nn.Module、训练循环、保存/加载</p>
+                                <p style="margin-bottom: 0;"><strong>练习：</strong>实现训练/验证循环并绘制训练曲线</p>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    3.2 神经网络与反向传播</h3>
+                                <p style="margin-bottom: 0.8rem;">感知机、激活函数、反向传播原理、自动微分</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>练习：</strong>手写小型反向传播实现（2 层）</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 神经元模型：</strong>感知机、激活函数（Sigmoid, Tanh, ReLU）及其特性。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 前馈神经网络：</strong>多层感知机 (MLP)、向前传播、通用近似定理。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 梯度反向传播 (Backpropagation)：</strong>参数学习、梯度下降、链式法则、自动微分。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教材：</strong>《Neural Networks and Learning Machines》
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>《An Overview of Gradient Descent Optimization
+                                        Algorithms》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    3.3 深度训练实务（重要）</h3>
+                                <p style="margin-bottom: 0.8rem;">初始化、BatchNorm、Dropout、数据增强、优化器、学习率调度、微调策略、正则化</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>练习：</strong>Ablation 实验（逐项启停训练技巧）</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 数据预处理：</strong>数据增广（旋转、翻转、缩放等）、数据归一化。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 参数初始化：</strong>核心原则（避免对称）、随机初始化、预训练初始化。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 损失函数：</strong>回归损失（平方损失）、分类损失（交叉熵）、样本不均衡（Focal Loss）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 优化算法：</strong>BGD, SGD, Min-Batch GD、SGD+Momentum、Adam。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 超参技巧：</strong>网格/随机搜索、学习率调整策略（衰减式、周期性）、网络层归一化（Batch Norm）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 模型微调 (Finetuning)：</strong>核心逻辑、微调策略（固定或微调不同层、小学习率）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 模型泛化：</strong>L1/L2 正则化、早停、随机失活 (Dropout)、标签平滑。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>Batch Norm 原始论文
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>Adam 原始论文
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>Dropout 原始论文
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    3.4 卷积神经网络（CNN）</h3>
+                                <p style="margin-bottom: 0.8rem;">
+                                    卷积、池化、感受野、经典网络（LeNet、AlexNet、VGG、ResNet、DenseNet）、可视化特征图</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>练习：</strong>在 CIFAR-10 上训练并对比网络架构</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] CNN 基础：</strong>全连接局限性、局部连接、权值共享、平移不变性。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] CNN 核心组件：</strong>卷积层（滤波器、步幅、填充）、激活层 (ReLU)、池化层（Max/Avg Pooling）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 感受野 (Receptive Field)：</strong>定义、计算、与网络深度的关系。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 经典 CNN 模型：</strong>LeNet-5、AlexNet、VGG、GoogLeNet
+                                        (Inception)、ResNet (残差连接)、DenseNet (密集连接)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] CNN 可视化：</strong>特征分层特性（浅层提取边缘纹理，深层提取高级语义）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>LeNet-5 原文
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>AlexNet 原文
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>ResNet 原文
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 教程：</strong>PyTorch 微调 ResNet 实战
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    3.5 RNN/LSTM/Seq2Seq/Attention</h3>
+                                <p style="margin-bottom: 0.8rem;">时间展开、BPTT、LSTM/GRU、Seq2Seq 与注意力机制、CTC 简介（语音）</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>练习：</strong>字符级语言模型或情感分类微调</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] RNN 基础：</strong>时间展开与参数共享、序列映射类型 (One-to-Many, Many-to-One 等)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 语言模型 (RNN-LM)：</strong>链式法则、困惑度 (Perplexity)、训练与生成。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] RNN 结构变体：</strong>双向 RNN (Bi-RNN)、深层 (堆叠) RNN。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] RNN 训练：</strong>随时间反向传播 (BPTT)、梯度消失与梯度爆炸、梯度裁剪。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] CTC (连接主义时序分类)：</strong>原理（引入 blank）、应用（语音识别）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 长程依赖与门控结构：</strong>长短时记忆网络 (LSTM)（遗忘门、输入门、输出门、细胞状态）、门控循环单元 (GRU)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>LSTM 原理论文 (Hochreiter & Schmidhuber, 1997)
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 文章：</strong>Christopher Olah LSTM 直观讲解
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    3.6 Transformer 与 LLM 入门</h3>
+                                <p style="margin-bottom: 0.8rem;">
+                                    Self-Attention、Multi-Head、位置编码、Encoder/Decoder、PEFT（LoRA）与微调流程</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>练习：</strong>Hugging Face 小模型微调 demo</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] Seq2Seq 与注意力：</strong>Encoder-Decoder 框架、注意力机制 (Bahdanau/Luong)。
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>Attention 原理论文 (Bahdanau et al., 2014)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    3.7 无监督深度学习 & 生成模型</h3>
+                                <p style="margin-bottom: 0.8rem;">自编码器、VAE、GAN、Diffusion（基础概念）</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>练习：</strong>去噪自编码器或小型 GAN 复现</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 无监督学习基础：</strong>核心任务（特征学习、密度估计、聚类）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 自编码器 (Auto-encoder)：</strong>基本结构 (Encoder-Decoder)、深度 AE、去噪 AE、卷积
+                                        AE。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] AE 特征解纠缠：</strong>使嵌入特征不同维度对应独立语义信息。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] AE 应用：</strong>生成与压缩、异常检测。
+                                    </li>
+                                    <li style="margin-bottom: 0; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>去噪自编码器论文
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    阶段性验收 I（深度学习） — 提交要求与评分细则见网站模板</h3>
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        必须提交 Notebook、对比实验、500–800 字报告、模型权重
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        评估：可复现性（30）、理论理解（20）、实验设计（30）、工程质量（20）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        通过条件：总分 ≥ 70 且可复现性项 ≥ 20
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段4：专项方向 -->
+                <section id="stage4" class="section">
+                    <h2 class="section-title">阶段 4：专项方向（任选其一，4 周） — 阶段性验收 II（专项验收）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本阶段严格对应原始导图中"第三阶段：专业方向与前沿课题"的条目（CV / 3D / GenAI & LLM / RL），每个方向都在单独的进阶 .md
+                                中详细展开（站点会提供单独页面）。
+                            </p>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    4.0 方向选择与学习路径（概览）</h3>
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>方向 A：</strong>计算机视觉（图像处理 → 特征 → 检测/分割 → 深度视觉）
+                                    </li>
+                                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>方向 B：</strong>3D（mesh/voxel/point cloud/NeRF/3DGS）
+                                    </li>
+                                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>方向 C：</strong>生成式 AI 与 LLM（Transformer、GAN、VAE、Diffusion、LLM
+                                        训练/微调/PEFT/RLHF）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>方向 D：</strong>强化学习（MDP、DP、TD、DQN、PPO、SAC、Actor-Critic）
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    专项验收（II）提交物：</h3>
+                                <p style="margin-bottom: 1rem;">完整 Repo（代码、数据说明、训练脚本、推理脚本）、报告（800–1200 字）、演示（2 分钟视频/GIF）
+                                </p>
+                                <p style="margin-bottom: 0.5rem;"><strong>评分（满分 100）：</strong></p>
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        完整性（30）、性能/评估（30）、技术深度（20）、报告与演示（20）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        通过门槛 ≥ 75 且完整性项 ≥ 20
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 提交模板 -->
+                <section id="submission" class="section">
+                    <h2 class="section-title">提交模板与 Repo 目录建议（网站可直接提供模板）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; font-family: monospace; border-left: 4px solid var(--secondary-color);">
+                                <pre style="margin: 0; white-space: pre-wrap; font-size: 0.9rem;">/project-name
+  /data
+  /notebooks
+  /src
+  requirements.txt
+  README.md
+  report.pdf
+  model.pth</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 导师注释 -->
+                <section id="notes" class="section">
+                    <h2 class="section-title">导师注释与应该避免的常见错误</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>强制第一阶段通过后方可进入第二阶段</strong>
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    网站提供 CPU 可复现路径以方便导师检查
+                                </li>
+                                <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    建议提供一轮反馈与一次改进机会（例如 5 天）
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 版权与来源 -->
+                <section id="copyright" class="section">
+                    <h2 class="section-title">版权与来源</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <p style="margin-bottom: 0; line-height: 1.8;">
+                                本文档与所有结构、知识点、资源清单均基于上传的《大连理工大学人工智能研究生入门学习指南》（原始导图）整理与分层。请在网站页面注明原指南来源以便追溯。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

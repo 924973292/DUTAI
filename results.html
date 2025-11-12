@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课后作业 - 大连理工大学人工智能入门计划</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 内嵌CSS - 与其他页面保持一致 */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2a6f97;
+            --accent-color: #f97316;
+            --text-color: #333333;
+            --light-gray: #f3f4f6;
+            --medium-gray: #e5e7eb;
+            --dark-gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #b8bbbe;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-scrolled {
+            background-color: rgba(128, 129, 131, 0.95);
+            padding: 0.8rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 移动端菜单 */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu li {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            display: flex;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 300px;
+            padding-right: 2rem;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .profile-title {
+            color: var(--dark-gray);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            text-align: left;
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-item i {
+            margin-right: 0.8rem;
+            color: var(--secondary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .toc {
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .toc h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.3rem 0;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover,
+        .toc-link.active {
+            color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        /* 内容区域样式 */
+        .content {
+            flex: 1;
+            padding-left: 2rem;
+            border-left: 1px solid var(--medium-gray);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .section-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding-right: 0;
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .content {
+                padding-left: 0;
+                border-left: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .mobile-menu.hidden {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-name {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .section-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<script>
+    // 内嵌JavaScript
+    document.addEventListener('DOMContentLoaded', function () {
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 目录导航激活状态
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', function () {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+</script>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="index.html" class="logo">大连理工大学人工智能入门计划</a>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">计划背景</a></li>
+
+                    <li><a href="./beginner-guide.html">学习路径</a></li>
+                    <li><a href="path-planning.html">知识导图</a></li>
+                    <li><a href="./results.html">课后作业</a></li>
+                    <li><a href="./previous.html">往期资料</a></li>
+                </ul>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+            <ul class="mobile-menu" id="mobile-menu">
+                <li><a href="index.html#about">计划背景</a></li>
+
+                <li><a href="path-planning.html">知识导图</a></li>
+                <li><a href="./beginner-guide.html">学习路径</a></li>
+                <li><a href="./results.html">课后作业</a></li>
+                <li><a href="./previous.html">往期资料</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <div class="container">
+        <div class="main-content">
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <div class="profile">
+                    <img src=img1/logo.png
+                        alt="个人照片" class="profile-image">
+                    <h2 class="profile-name">大连理工大学人工智能入门计划负责人</h2>
+                    <p class="profile-title">大连理工大学人工智能入门计划</p>
+                </div>
+
+                <div class="contact-info">
+                    <h3>联系信息</h3>
+                    <div class="contact-item">
+                        <a href="mailto:research@example.com">X X X </a>
+                    </div>
+                    <div class="contact-item">
+                        <span>联系电话：<br>18018930609</span>
+                    </div>
+                    <div class="contact-item">
+                        <a href="" target="_blank" rel="noopener">X X X</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>联系电话：<br>18804265475</span>
+                    </div>
+                </div>
+
+                <!-- <div class="toc">
+                    <h3>目录</h3>
+                    <ul class="toc-list">
+                        <li><a href="#resources" class="toc-link">核心学习资源</a></li>
+                        <li><a href="#math" class="toc-link">阶段项目（数学验收）</a></li>
+                        <li><a href="#ml" class="toc-link">阶段项目（机器学习验收）</a></li>
+                        <li><a href="#dl" class="toc-link">阶段 II：深度学习核心</a></li>
+                        <li><a href="#rl" class="toc-link">方向 A：强化学习</a></li>
+                        <li><a href="#cv" class="toc-link">方向 B：计算机视觉</a></li>
+                        <li><a href="#aigc" class="toc-link">方向 C：生成式 AI 与 LLM</a></li>
+                        <li><a href="#3d" class="toc-link">方向 D：3D 计算机图形学</a></li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content">
+                <!-- 标题和介绍 -->
+                <section id="introduction" class="section">
+                    <h1 class="section-title">课后作业</h1>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <h2
+                                style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                                人工智能学习路径 - 实战与验收资源地图</h2>
+
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本文档提供各阶段验收项目的详细要求、资源链接与代码示例，帮助学员顺利完成从数学基础到专项方向的各项验收任务。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 核心学习资源 -->
+                <section id="resources" class="section">
+                    <h2 class="section-title">核心学习资源（贯穿始终）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    动手学深度学习 (D2L) - 教材与代码</h3>
+                                <p style="margin-bottom: 0.8rem;"><strong>链接：</strong><a
+                                        href="https://courses.d2l.ai/zh-v2/" target="_blank" rel="noopener"
+                                        style="color: var(--secondary-color); text-decoration: none;">https://courses.d2l.ai/zh-v2/</a>
+                                </p>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    PyTorch 官方教程</h3>
+                                <p style="margin-bottom: 0.8rem;"><strong>链接：</strong><a
+                                        href="https://pytorch.org/tutorials/" target="_blank" rel="noopener"
+                                        style="color: var(--secondary-color); text-decoration: none;">https://pytorch.org/tutorials/</a>
+                                </p>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    Hugging Face 官方文档 (LLM/AIGC)</h3>
+                                <p style="margin-bottom: 0.8rem;"><strong>链接：</strong><a
+                                        href="https://huggingface.co/docs/transformers/index" target="_blank"
+                                        rel="noopener"
+                                        style="color: var(--secondary-color); text-decoration: none;">https://huggingface.co/docs/transformers/index</a>
+                                </p>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 0; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    Stable Baselines3 (强化学习)</h3>
+                                <p style="margin-bottom: 0;"><strong>链接：</strong><a
+                                        href="https://stable-baselines3.readthedocs.io/en/master/" target="_blank"
+                                        rel="noopener"
+                                        style="color: var(--secondary-color); text-decoration: none;">https://stable-baselines3.readthedocs.io/en/master/</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段项目（数学验收） -->
+                <section id="math" class="section">
+                    <h2 class="section-title">阶段项目（数学验收）：PCA + 线性回归 Pipeline</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    任务</h3>
+                                <p style="margin-bottom: 0;">实现 PCA 降维和线性回归的端到端流程。</p>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    资源/代码</h3>
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>D2L 章节：</strong>线性回归简洁实现
+                                    </li>
+                                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>CSDN 教程：</strong>主成分分析（PCA）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>Scikit-learn PCA 示例：</strong><a
+                                            href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html"
+                                            target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    验收要求</h3>
+                                <p style="margin-bottom: 0; line-height: 1.8;">
+                                    Notebook + 300 字总结，展示可视化与核心指标。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段项目（机器学习验收） -->
+                <section id="ml" class="section">
+                    <h2 class="section-title">阶段项目（机器学习验收）：端到端应用</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    任务</h3>
+                                <p style="margin-bottom: 0;">完成完整的 ML 流程（预处理→特征工程→模型比较→交叉验证）。</p>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    资源/代码</h3>
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>Scikit-learn 机器学习 Pipeline 示例：</strong><a
+                                            href="https://scikit-learn.org/stable/model_selection.html" target="_blank"
+                                            rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">https://scikit-learn.org/stable/model_selection.html</a>
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                        <strong>Kaggle 泰坦尼克号 Notebook 模板：</strong><a
+                                            href="https://www.kaggle.com/competitions/titanic/code" target="_blank"
+                                            rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">https://www.kaggle.com/competitions/titanic/code</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    验收要求</h3>
+                                <p style="margin-bottom: 0; line-height: 1.8;">
+                                    清晰展示预处理、特征工程、模型对比（至少 3 种）和 K-Fold 交叉验证结果。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段 II：深度学习核心 -->
+                <section id="dl" class="section">
+                    <h2 class="section-title">阶段 II：深度学习核心（阶段性验收 I）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    阶段性验收 I（深度学习）：综合项目</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        任务</h4>
+                                    <p style="margin-bottom: 0;">任选一个 CNN/RNN/Transformer 任务（如图像分类/序列预测），完成模型构建与对比实验。
+                                    </p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        核心知识点</h4>
+                                    <p style="margin-bottom: 0;">ResNet、LSTM/GRU、自注意力机制。</p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        资源/代码</h4>
+                                    <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>D2L 章节：</strong>ResNet 实现
+                                        </li>
+                                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>D2L 章节：</strong>Transformer 实现
+                                        </li>
+                                        <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>PyTorch 官方 Transformer 机器翻译示例：</strong><a
+                                                href="https://github.com/pytorch/examples/tree/main/language_translation"
+                                                target="_blank" rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://github.com/pytorch/examples/tree/main/language_translation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        验收要求</h4>
+                                    <p style="margin-bottom: 0;">总分 ≥ 70 且可复现性 ≥ 20（提交 Notebook、对比实验、500–800 字报告、模型权重）。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 阶段 III：专项方向进阶 -->
+                <section id="stage3" class="section">
+                    <h2 class="section-title">阶段 III：专项方向进阶（终验收项目）</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本阶段为专项方向终验收，学员需从四个方向中任选其一完成项目验收。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 方向 A：强化学习 -->
+                <section id="rl" class="section">
+                    <h2 class="section-title">方向 A：强化学习 (RL)</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    核心实战：Q-Learning/DQN 实践</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        任务</h4>
+                                    <p style="margin-bottom: 0.8rem;">在表格型环境（FrozenLake）和连续型环境（CartPole）上实现 DQN。</p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        资源/代码</h4>
+                                    <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>D2L 章节：</strong>DQN 深度 Q 网络
+                                        </li>
+                                        <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>OpenAI Gym/Farama-Suite 环境：</strong><a
+                                                href="https://gymnasium.farama.org" target="_blank" rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://gymnasium.farama.org</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    项目建议（验收样例）</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        1. DQN 在 CartPole 或 LunarLander 上达到稳定策略</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>训练曲线（Reward 随 Step
+                                        变化）、超参说明、Agent 稳定性分析。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html"
+                                            target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">Stable
+                                            Baselines3 DQN 示例</a></p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        2. PPO 在连续控制任务上的比较实验（如 MountainCarContinuous）</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>算法实现（或 Stable Baselines3
+                                        调用记录）、与基线算法的比较结果（Mean Reward 报表）。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html"
+                                            target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">Stable
+                                            Baselines3 PPO 教程</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 方向 B：计算机视觉 -->
+                <section id="cv" class="section">
+                    <h2 class="section-title">方向 B：计算机视觉 (CV)</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    核心实战：传统 CV/特征匹配与深度学习 CV</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        任务</h4>
+                                    <p style="margin-bottom: 0;">使用 OpenCV 实现 SIFT 特征提取与 RANSAC 鲁棒匹配。</p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        资源/代码</h4>
+                                    <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>OpenCV SIFT/RANSAC 教程：</strong><a
+                                                href="https://docs.opencv.ac.cn/4.11.0/da/df5/tutorial_py_sift_intro.html"
+                                                target="_blank" rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://docs.opencv.ac.cn/4.11.0/da/df5/tutorial_py_sift_intro.html</a>
+                                            <a href="https://plus-wave.github.io/article/aljo8frg/#_3-实践操作"
+                                                target="_blank" rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://plus-wave.github.io/article/aljo8frg/#_3-实践操作</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    项目建议（验收样例）</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        1. 目标检测微调（YOLOv5/YOLOv8）</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>数据：</strong>自建小数据集或 COCO 子集。</p>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>训练脚本、推理脚本、mAP 报表（至少
+                                        mAP50）、预测可视化结果。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://github.com/ultralytics/ultralytics" target="_blank"
+                                            rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">Ultralytics
+                                            YOLOv8 GitHub</a></p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        2. 实例分割（Mask R-CNN）</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>训练日志、mIoU/mAP 评估、分割可视化。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://github.com/facebookresearch/detectron2" target="_blank"
+                                            rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">Detectron2
+                                            实例分割教程</a></p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        3. 单目深度估计小 demo</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>深度地图可视化（与原图对比）、模型评估（如果有 ground
+                                        truth）。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://github.com/intel-isl/MiDaS" target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">MiDaS 深度估计模型
+                                            GitHub</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 方向 C：生成式 AI 与 LLM -->
+                <section id="aigc" class="section">
+                    <h2 class="section-title">方向 C：生成式 AI 与 LLM (AIGC)</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    核心实战：LoRA 微调与 RAG 基础</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        任务</h4>
+                                    <p style="margin-bottom: 0.8rem;">使用 Hugging Face PEFT/LoRA 微调小型 LLM；使用
+                                        LlamaIndex/LangChain 搭建 RAG。</p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        资源/代码</h4>
+                                    <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>Hugging Face PEFT LoRA 官方教程：</strong><a
+                                                href="https://huggingface.co/docs/peft/main/en/conceptual_guides/lora"
+                                                target="_blank" rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://huggingface.co/docs/peft/main/en/conceptual_guides/lora</a>
+                                        </li>
+                                        <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>LangChain RAG 教程：</strong><a
+                                                href="https://www.langchain.com.cn/docs/tutorials/rag/" target="_blank"
+                                                rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://www.langchain.com.cn/docs/tutorials/rag/</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    项目建议（验收样例）</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        1. 大模型指令微调与评估</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>微调脚本（LoRA）、训练日志、评估报告（自动指标 +
+                                        人工评分）、推理演示。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://huggingface.co/docs/trl/en/" target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">Hugging Face
+                                            TRL/PEFT 库</a></p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        2. 基于 RAG 的知识库问答系统</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>数据处理
+                                        pipeline（分割、向量化）、检索引擎代码、问答交互界面、检索效果评估（召回率/准确率）。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://docs.llamaindex.org.cn/en/stable/optimizing/building_rag_from_scratch/"
+                                            target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">LlamaIndex 官方
+                                            RAG 示例</a></p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        3. LLM Agent 工具使用应用</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>Agent 框架代码（基于
+                                        ReAct/CoT）、多轮对话示例、工具调用准确率统计。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://python.langchain.ac.cn/docs/tutorials/agents/" target="_blank"
+                                            rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">LangChain
+                                            Agents 教程</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 方向 D：3D 计算机图形学 -->
+                <section id="3d" class="section">
+                    <h2 class="section-title">方向 D：3D 计算机图形学 (3D Graphics/Vision)</h2>
+                    <div class="section-content">
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    核心实战：点云处理与 3D 深度学习</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        任务</h4>
+                                    <p style="margin-bottom: 0.8rem;">使用 Open3D 进行点云配准（ICP）；复现 PointNet 核心结构。</p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        资源/代码</h4>
+                                    <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>Open3D 官方 ICP 教程：</strong><a
+                                                href="https://www.open3d.org/html/tutorial/pipelines/icp_registration.html"
+                                                target="_blank" rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://www.open3d.org/html/tutorial/pipelines/icp_registration.html</a>
+                                        </li>
+                                        <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                            <span
+                                                style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                            <strong>GitHub PointNet PyTorch 实现：</strong><a
+                                                href="https://github.com/fxia22/pointnet.pytorch" target="_blank"
+                                                rel="noopener"
+                                                style="color: var(--secondary-color); text-decoration: none;">https://github.com/fxia22/pointnet.pytorch</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.5rem; border-radius: 8px; margin-bottom: 0; border-left: 4px solid #ffa500;">
+                                <h3
+                                    style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">
+                                    项目建议（验收样例）</h3>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        1. Point Cloud 分类/分割（基于 PointNet/PointNet++）</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>数据：</strong>ModelNet/ShapeNet 子集。</p>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>训练日志、分类精度/分割 IoU（至少 3
+                                        个类别）、可视化分割/分类结果。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://github.com/charlesq34/pointnet" target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">PointNet 论文与
+                                            GitHub 实现</a></p>
+                                </div>
+
+                                <div
+                                    style="background-color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 0;">
+                                    <h4
+                                        style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                        2. NeRF 简化复现</h4>
+                                    <p style="margin-bottom: 0.5rem;"><strong>任务：</strong>在小型多视角物体图像集上训练 NeRF。</p>
+                                    <p style="margin-bottom: 0.5rem;"><strong>交付：</strong>渲染结果对比图（原图 vs NeRF
+                                        渲染）、训练细节说明、新视角渲染视频（GIF）。</p>
+                                    <p style="margin-bottom: 0;"><strong>资源：</strong><a
+                                            href="https://github.com/bmild/nerf" target="_blank" rel="noopener"
+                                            style="color: var(--secondary-color); text-decoration: none;">TinyNeRF 或即插即用
+                                            NeRF 实现</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

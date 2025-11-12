@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识导图 - 大连理工大学人工智能入门计划</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 内嵌CSS */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2a6f97;
+            --accent-color: #f97316;
+            --text-color: #333333;
+            --light-gray: #f3f4f6;
+            --medium-gray: #e5e7eb;
+            --dark-gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #b8bbbe;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-scrolled {
+            background-color: rgba(128, 129, 131, 0.95);
+            padding: 0.8rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 移动端菜单 */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu li {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            display: flex;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 300px;
+            padding-right: 2rem;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .profile-title {
+            color: var(--dark-gray);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            text-align: left;
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-item i {
+            margin-right: 0.8rem;
+            color: var(--secondary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .toc {
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .toc h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.3rem 0;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover,
+        .toc-link.active {
+            color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        /* 内容区域样式 */
+        .content {
+            flex: 1;
+            padding-left: 2rem;
+            border-left: 1px solid var(--medium-gray);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .section-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding-right: 0;
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .content {
+                padding-left: 0;
+                border-left: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .mobile-menu.hidden {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-name {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .section-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<script>
+    // 内嵌JavaScript
+    document.addEventListener('DOMContentLoaded', function () {
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 目录导航激活状态
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', function () {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+
+</script>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="index.html" class="logo">大连理工大学人工智能入门计划</a>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">计划背景</a></li>
+
+                    <li><a href="./beginner-guide.html">学习路径</a></li>
+                    <li><a href="path-planning.html">知识导图</a></li>
+                    <li><a href="./results.html">课后作业</a></li>
+                    <li><a href="./previous.html">往期资料</a></li>
+                </ul>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+            <ul class="mobile-menu" id="mobile-menu">
+                <li><a href="index.html#about">计划背景</a></li>
+
+                <li><a href="path-planning.html">知识导图</a></li>
+                <li><a href="./beginner-guide.html">学习路径</a></li>
+                <li><a href="./results.html">课后作业</a></li>
+                <li><a href="./previous.html">往期资料</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <div class="container">
+        <div class="main-content">
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <div class="profile">
+                    <img src=img1/logo.png
+                        alt="个人照片" class="profile-image">
+                    <h2 class="profile-name">大连理工大学人工智能入门计划负责人</h2>
+                    <p class="profile-title">大连理工大学人工智能入门计划</p>
+                </div>
+
+                <div class="contact-info">
+                    <h3>联系信息</h3>
+                    <div class="contact-item">
+                        <a href="mailto:research@example.com">X X X </a>
+                    </div>
+                    <div class="contact-item">
+                        <span>联系电话：<br>18018930609</span>
+                    </div>
+                    <div class="contact-item">
+                        <a href="" target="_blank">X X X</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>联系电话：<br>18804265475</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content">
+
+
+                <!-- 初学者启动阶段 -->
+                <section id="beginner" class="section">
+                    <h2 class="section-title">初学者启动阶段</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-beginner">
+                                <a href="./interactive/初学者启动阶段.html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                初学者启动阶段（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Math (数学知识) -->
+                <section id="math" class="section">
+                    <h2 class="section-title">Math (数学知识)</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-math">
+                                <a href="./interactive/人工智能的数学基础.html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                人工智能的数学基础（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DL (深度学习) -->
+                <section id="dl" class="section">
+                    <h2 class="section-title">DL (深度学习)</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-dl">
+                                <a href="./interactive/深度学习 (Deep Learning).html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                深度学习（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3D (3D Computer Graphics) -->
+                <section id="3d" class="section">
+                    <h2 class="section-title">3D (3D Computer Graphics)</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-3d">
+                                <a href="./interactive/3D_Computer_Graphics.html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                3D Computer Graphics（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 详细内容 -->
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <h3
+                                style="font-size: 1.3rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                                3D 方向 — 进阶学习与项目指南</h3>
+
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本文件基于原始导图中"3D 计算机图形学"与相关条目（Mesh / Voxel / Point Cloud / 3DGS / NeRF）逐条展开，旨在为希望在 3D
+                                视觉/图形方向做深入研究或工程实现的同学提供完整学习路线与验收模板。
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                知识体系（逐条映射）</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>Mesh：</strong>网格基础、顶点/面/法线、纹理映射、空间变换
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>Voxel：</strong>体素表示、体渲染基础
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>Point Cloud：</strong>点云表示、ICP 对齐、点云特征提取、噪声处理
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>3D Gaussian Splatting（3DGS）：</strong>可微分高斯基元、渲染技术
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>NeRF（神经辐射场）：</strong>位置编码、体渲染、粗/细采样策略
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                学习路径（4 周建议）</h4>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 1 — 基础与数据格式</h5>
+                                <p style="margin-bottom: 0.8rem;"><strong>学习：</strong>PLY/OBJ/PCD 格式，Mesh 基础，点云基本操作（PCL
+                                    / Open3D）</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>用 Open3D 读取并可视化点云/网格</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] Mesh (网格)：</strong>基本介绍、数学原理（空间变换）、建模方法（手动、扫描、程序）、优缺点（渲染高效、细节不足）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] Voxel (体素)：</strong>基本介绍（三维空间单元）、数学原理（光线投射）、优缺点（体积效果好、开销大）。
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 2 — 点云处理与特征学习</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>ICP、法线估计、PointNet/PointNet++、点云数据增强
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>PointNet-lite 实现点云分类/分割</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] Point Cloud (点云)：</strong>基本介绍（离散点集）、特点（稀疏、无序）、关键算法（ICP
+                                        配准、特征提取）、优缺点（对接扫描、噪声敏感）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>《PointNet: Deep Learning on Point Sets...》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 3 — NeRF 与体渲染入门</h5>
+                                <p style="margin-bottom: 0.8rem;"><strong>学习：</strong>NeRF 原理、位置编码、体渲染方程、训练流程</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>使用现成实现（tiny NeRF）复现小场景渲染</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] NeRF (神经辐射场)：</strong>核心思想（MLP
+                                        隐式学习）、数学原理（粗/细网络）、模型结构（位置编码、体渲染）、优缺点（效果好、训练慢）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>《NeRF: Representing Scenes as Neural Radiance
+                                        Fields...》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 4 — 3DGS 与进阶技术</h5>
+                                <p style="margin-bottom: 0.8rem;"><strong>学习：</strong>3D Gaussian Splatting
+                                    的核心思想与实现挑战（可微分渲染、效率优化）</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>阅读并复现论文中的关键组件（若硬件资源受限可做算法级模拟）</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 3DGS (3D 高斯)：</strong>核心思想（可微分 3D 高斯基元）、数学原理（Splatting
+                                        卷积）、实现方式（点云初始化、自适应调节）、优缺点（实时渲染、显存占用高）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>《3D Gaussian Splatting for Real-Time...》
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                项目建议（验收样例）</h4>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Point Cloud 分类/分割（基于 PointNet）</h5>
+                                <p style="margin-bottom: 0.5rem;"><strong>数据：</strong>ModelNet/ShapeNet 子集</p>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>训练日志、分类精度/分割 IoU、可视化</p>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    NeRF 简化复现</h5>
+                                <p style="margin-bottom: 0.5rem;"><strong>数据：</strong>小型多视角物体图像集</p>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>渲染结果对比图、训练细节说明</p>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                资源（来源导图）</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>论文：</strong>PointNet、NeRF、3D Gaussian Splatting
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>工具：</strong>Open3D、PCL、PyTorch3D
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                验收要点</h4>
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        数据处理与可视化（20）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        算法实现与训练日志（25）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        性能与结果质量（30）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        报告与工程（25）
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RL (强化学习) -->
+                <section id="rl" class="section">
+                    <h2 class="section-title">RL (强化学习)</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-rl">
+                                <!-- 这个区域已改为跳转至交互版页面 -->
+                                <a href="./interactive/强化学习 (Reinforcement Learning).html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                强化学习（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- 使用说明 -->
+                            <div
+                                style="background-color: #fff9e6; padding: 12px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #ffa500; font-size: 13px; color: #666;">
+                                <strong style="color: var(--primary-color); display: block; margin-bottom: 6px;">
+                                    <i class="fas fa-info-circle"></i> 如何添加 XMind 导图：</strong>
+                                <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>在 XMind 软件中打开 <code
+                                            style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">RL (强化学习).xmind</code>
+                                        文件</li>
+                                    <li>点击菜单：<strong>文件 → 导出 → 图片</strong></li>
+                                    <li>选择 PNG 格式，保存到 <code
+                                            style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">img1</code>
+                                        文件夹</li>
+                                    <li>命名为 <code
+                                            style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">RL (Reinforcement Learning).png</code>
+                                    </li>
+                                    <li>刷新页面即可看到导图</li>
+                                </ol>
+                            </div>
+
+                            <!-- 方式2: 如果只想提供下载链接，使用这个 -->
+                            <!-- <div style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; margin-top: 12px;">
+                                <a href="img1/RL.xmind" download 
+                                   style="display: inline-flex; align-items: center; gap: 8px; color: #0066cc; text-decoration: none; font-size: 15px; padding: 10px 16px; background-color: #f0f7ff; border-radius: 4px; transition: all 0.2s;">
+                                    <i class="fas fa-download"></i>
+                                    <span>下载 XMind 原文件</span>
+                                </a>
+                            </div> -->
+                        </div>
+
+                        <!-- 预览模态框已移除（改为跳转交互页） -->
+
+                        <!-- md文档链接 -->
+                        <!-- <div style="margin: 20px 0;">
+                            <a href="#"
+                                style="display: inline-flex; align-items: center; gap: 8px; color: #0066cc; text-decoration: none; font-size: 15px; padding: 10px 16px; background-color: #f0f7ff; border-radius: 4px; transition: all 0.2s;">
+                                <i class="fas fa-file-alt"></i>
+                                <span>强化学习（RL）— 进阶学习与项目指南</span>
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div> -->
+
+                        <!-- 详细内容 -->
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <h3
+                                style="font-size: 1.3rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                                强化学习（RL）— 进阶学习与项目指南</h3>
+
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本文档严格映射原始导图中强化学习条目（MDP、DP、TD、Q-Learning、Policy Gradient、DQN、PPO、SAC、Actor-Critic
+                                等），旨在为希望在 RL 方向完成复现或算法实现的学员提供路线与验收模板。
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                核心知识点（逐条对应）</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>MDP 与贝尔曼方程：</strong>状态、动作、转移概率、奖励、折扣因子
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>价值函数（V、Q）、策略：</strong>确定性/随机、策略迭代和值迭代
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>无模型方法：</strong>蒙特卡洛、TD（SARSA、Q-Learning）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>策略梯度方法：</strong>REINFORCE、Actor-Critic
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>深度 RL：</strong>DQN（经验回放、target network）、PPO（剪切目标）、SAC（最大化熵）
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                学习路径（4 周建议）</h4>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 1 — RL 基础与经典算法</h5>
+                                <p style="margin-bottom: 0.8rem;"><strong>学习：</strong>MDP 定义、贝尔曼方程、动态规划（Value/Policy
+                                    Iteration）</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>实现小规模 GridWorld 的 Value Iteration
+                                </p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] RL 基础：</strong>马尔可夫决策过程 (MDP)（五元组 {S, A, P, R, γ}）、贝尔曼方程、价值函数
+                                        (V(s), Q(s,a))。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 图表：</strong>强化学习算法演进路径图
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 2 — 无模型方法与经典表格法</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>蒙特卡洛、TD、SARSA、Q-Learning
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>实现 Q-Learning 并在简单环境中训练（如
+                                    FrozenLake）</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 经典求解思路：</strong>动态规划 (DP)（Model-Based）、策略迭代、值函数迭代。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 无模型方法 (Model-Free)：</strong>蒙特卡洛 (MC)（完整轨迹、高方差）、时间差分 (TD)（单步更新、自举
+                                        Bootstrapping）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 核心控制算法：</strong>Sarsa (On-policy TD)、Q-Learning (Off-policy
+                                        TD)、策略梯度 (PG)（直接参数化策略）。
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 3 — 深度 RL 入门（DQN）</h5>
+                                <p style="margin-bottom: 0.8rem;"><strong>学习：</strong>经验回放、固定 target network、ε-greedy
+                                    等技巧</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>实现 DQN 在 CartPole 或 LunarLander
+                                    上训练并记录回合奖励曲线</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 深度强化学习 (DRL)：</strong>DQN（Q-Learning + DNN）、经验回放 (Experience
+                                        Replay)、固定 Q 目标 (Fixed Q-targets)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] Actor-Critic (AC)：</strong>结合策略梯度 (Actor) 和价值函数 (Critic)。
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 4 — 高级策略（PPO/SAC）与稳定性技巧</h5>
+                                <p style="margin-bottom: 0.8rem;"><strong>学习：</strong>PPO 裁剪目标、SAC 的熵最大化思想、Actor-Critic
+                                    结构</p>
+                                <p style="margin-bottom: 0.8rem;"><strong>练习：</strong>使用现成库（Stable Baselines3）跑 PPO
+                                    并对比超参影响</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 高级 AC 算法：</strong>PPO (Proximal Policy Optimization)（On-policy,
+                                        裁剪目标函数）、SAC (Soft Actor-Critic)（Off-policy, 最大化熵）。
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                项目建议（验收样例）</h4>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    DQN 在 CartPole 或 LunarLander 上达到稳定策略</h5>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>训练曲线、超参说明、稳定性分析</p>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    PPO 在连续控制任务上的比较实验（如 MountainCarContinuous）</h5>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>算法实现或 Stable Baselines3 调用记录、比较结果</p>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                验收要点</h4>
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        算法正确性与实现细节（30）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        训练曲线与稳定性分析（30）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        结果复现与 Hyperparam 敏感性分析（20）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        报告与演示（20）
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AIGC (生成式人工智能与大语言模型) -->
+                <section id="aigc" class="section">
+                    <h2 class="section-title">AIGC (生成式人工智能与大语言模型)</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-aigc">
+                                <a href="./interactive/生成式人工智能与大语言模型.html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                生成式人工智能与大语言模型（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- md文档链接 -->
+
+
+                        <!-- 详细内容 -->
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <h3
+                                style="font-size: 1.3rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                                生成式人工智能与大语言模型（AIGC）— 进阶学习与项目指南</h3>
+
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本文档为 "专项方向：生成式人工智能与大语言模型" 的进阶学习路径，系统梳理生成式 AI
+                                领域核心知识点、技术架构及实践资源，覆盖大语言模型（LLM）、Transformer、扩散模型、生成对抗网络（GAN）等关键技术模块。
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                目标读者</h4>
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                具备深度学习基础（已通过深度学习阶段验收 I），希望在 AIGC 方向完成复现/微调/工程化项目并通过专项验收的同学。
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                知识图谱（与原始导图逐条对应）</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>Transformer 架构：</strong>起源与核心突破、宏观架构与功能、Encoder/Decoder
+                                    子层结构、自注意力机制、多头注意力、位置编码、残差连接与层归一化、输出层功能
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>视觉 Transformer：</strong>ViT 核心流程、Swin Transformer 改进、Twins 架构、BeiT
+                                    自监督预训练、MLP-Mixer 特点、DETR 端到端检测、TrackFormer 跟踪机制、STARK 单目标跟踪、MaskFormer 分割方案
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>大语言模型预训练：</strong>预训练本质与三阶段流程、模型架构选型（编码器 / 解码器 /
+                                    编解码器、MoE/RetNet）、预训练任务设计（CLM、统一任务范式）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>后训练优化：</strong>指令微调（定义、特性、数据构建）、RLHF（三阶段流程、关键技术、核心效果）、DPO（核心改进、数学基础、优势）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>参数高效微调（PEFT）：</strong>定义与优势、方法分类（参数附加 / 选择 / 低秩适配）、技术发展（LoRA/QLoRA）、与其他技术关系
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>提示工程：</strong>定义、工作流程、与传统方法对比、模板设计、大模型时代特点
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>LLM
+                                        Agent：</strong>基础定义、应用分类、优势、核心组件（规划、记忆、工具使用、行动）、规划机制（任务分解、自我反思）、记忆系统（分类、RAG）、工具使用（定义、框架、技术、评估）、行动与具身智能
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                学习路径与每周计划（4 周建议）</h4>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 1 — Transformer 基础与视觉应用</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>Transformer 核心原理（自注意力、多头注意力、位置编码）、视觉 Transformer（ViT、Swin
+                                    Transformer）架构与应用
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>用 PyTorch 实现简化版 Transformer、运行 ViT
+                                    图像分类 demo</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 核心架构：</strong>Transformer：起源、自注意力机制 (Q, K,
+                                        V)、多头注意力、位置编码、Encoder/Decoder 结构。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 视觉 Transformer：</strong>ViT (图像切分 Patch)、Swin Transformer (Window
+                                        Attention, Patch Merging)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 自回归模型 (AR Models)：</strong>核心思想（用过去预测未来）、NADE。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 变分自编码器 (VAE)：</strong>核心改进（输出概率分布）、重参数化技巧、损失函数（重构误差 + KL 散度）、解纠缠
+                                        VAE。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 生成对抗网络 (GAN)：</strong>核心定义（生成器 G vs 鉴别器 D）、Minimax 博弈、Conditional
+                                        GAN、DCGAN、CycleGAN、StyleGAN。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 扩散模型 (Diffusion Models,
+                                            DM)：</strong>核心定义（迭代去噪）、训练目标（最小化噪声预测损失）、DDIM、Stable Diffusion
+                                        (潜在扩散模型)、ControlNet。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 语言模型 (LM)：</strong>核心定义（预测下一个词）、N-gram LM、RNN-LM、评估指标（困惑度
+                                        Perplexity）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>《Attention Is All You Need》
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>BERT
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>VAE (Kingma & Welling, 2013)
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>GAN (Goodfellow et al., 2014)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 2 — 大语言模型预训练与微调</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>预训练三阶段流程、指令微调方法、PEFT 技术（LoRA/Adapter）
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>基于 Hugging Face 库微调小模型（如
+                                    DistilBERT）、用 LoRA 实现 LLaMA 系列模型高效微调</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 大模型预训练 (LLM Pretraining)：</strong>三阶段流程 (Pretrain, SFT,
+                                        RLHF)、预训练任务 (CLM)、模型架构选型 (Encoder-only, Decoder-only, Encoder-Decoder)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 提示工程 (Prompt Engineering)：</strong>定义、工作流程、模板设计。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 参数高效微调 (PEFT)：</strong>全参数微调局限性、LoRA（低秩组合）、Prefix-Tuning,
+                                        Prompt-Tuning。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 指令微调 (Instruction Fine-tuning)：</strong>核心定义（(指令, 输出)
+                                        样本对）、数据构建（Alpaca）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>DDPM (Ho et al., 2020)
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>LoRA
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 3 — 大模型优化与提示工程</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>RLHF/DPO 原理、提示工程技术（CoT、提示模板设计）
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>构建指令微调数据集、实现基础提示工程案例（如情感分析、问答）</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 基于人类偏好的强化学习 (RLHF)：</strong>三阶段流程（SFT, RM, RL 优化）、奖励模型 (RM) 训练、KL
+                                        散度惩罚。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 直接偏好优化 (DPO)：</strong>核心改进（移除 RL）、数学基础（转化为加权最大似然）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>RLHF (Training language models to follow
+                                        instructions...)
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>DPO (Direct Preference Optimization...)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 4 — LLM Agent 核心能力</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>Agent 四大组件（规划、记忆、工具使用、行动）、RAG 架构、工具调用流程
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>搭建简易 RAG 系统、开发调用 API 的工具使用
+                                    demo、尝试多智能体协作案例</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] LLM 智能体 (Agents)：</strong>核心定义（自主系统）、四大核心组件（规划、记忆、工具使用、行动）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 智能体 - 规划：</strong>思维链 (CoT)、思维树 (ToT)、ReAct（整合推理与动作）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 智能体 - 工具使用：</strong>HuggingGPT、Toolformer。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 智能体 - 记忆：</strong>检索增强生成 (RAG)（朴素 RAG, 高级 RAG, 模块化 RAG）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>Toolformer
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                项目建议（验收样例）</h4>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    1. 大模型指令微调与评估</h5>
+                                <p style="margin-bottom: 0.5rem;">
+                                    <strong>数据：</strong>自定义指令数据集（如特定领域问答）或开源数据集（Alpaca、ShareGPT）
+                                </p>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>微调脚本、训练日志（损失曲线）、评估报告（人工评分 + 自动指标）、推理演示
+                                </p>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    2. 基于 RAG 的知识库问答系统</h5>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>数据处理
+                                    pipeline（文本分割、向量化）、检索引擎代码、问答交互界面、检索效果评估（召回率、准确率）</p>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    3. LLM Agent 工具使用应用</h5>
+                                <p style="margin-bottom: 0.5rem;"><strong>功能：</strong>集成天气查询、计算器等 API 的智能体</p>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>工具调用框架代码、多轮对话示例、工具调用准确率统计</p>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    4. 图像生成模型微调与应用</h5>
+                                <p style="margin-bottom: 0.5rem;"><strong>数据：</strong>特定风格图像数据集</p>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>Stable Diffusion 微调脚本、生成效果对比（原图 vs
+                                    生成图）、风格迁移演示</p>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                资源汇总（从原始导图逐条罗列）</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>论文与文档：</strong>大模型训练与微调：Hugging Face 官方文档、LLaMA 系列技术报告；生成模型理论：《深度学习》第 20
+                                    章（GAN）、扩散模型原始论文
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>视频教程：</strong>吴恩达提示工程、斯坦福 CS231n 生成模型对比；B 站 Transformer、BERT 论文精读系列
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                验收要点（详尽）</h4>
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        数据准备与说明（20）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        模型训练与日志（曲线、超参）（25）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        评估指标（mAP/mIoU/PSNR 等）（25）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        工程与可复现性（代码结构、README、推理脚本）（20）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        可视化展示（10）
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CV (计算机视觉) -->
+                <section id="cv" class="section">
+                    <h2 class="section-title">CV (计算机视觉)</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-cv">
+                                <a href="./interactive/计算机视觉 (Computer Vision).html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                计算机视觉（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 详细内容 -->
+                        <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <h3
+                                style="font-size: 1.3rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                                计算机视觉（CV） — 进阶学习与项目指南</h3>
+
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                本文档为"专项方向：计算机视觉"的进阶学习路径，严格映射并扩展来源文档《大连理工大学人工智能研究生入门学习指南》中关于 CV 的所有知识点与资源条目。
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                目标读者</h4>
+                            <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                具备深度学习基础（已通过深度学习阶段验收 I），希望在 CV 方向完成复现/微调/工程化项目并通过专项验收的同学。
+                            </p>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                知识图谱（与原始导图逐条对应）</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>图像处理基础：</strong>直方图、几何变换、插值、颜色空间、直方图均衡化
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>图像滤波：</strong>线性/非线性滤波（Sobel、Laplacian）、卷积运算的本质
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>边缘检测：</strong>Canny 算法（高斯滤波、非极大值抑制、滞后阈值）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>特征与匹配：</strong>模板匹配、图像金字塔、RANSAC、SIFT/ORB、描述子匹配
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>核心任务：</strong>图像分类（CNN, ViT）、目标检测（R-CNN
+                                    系列、YOLO、SSD）、语义分割（FCN、U-Net、DeepLab）、实例分割（Mask R-CNN）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>图像恢复：</strong>去噪、去模糊、超分（SRCNN, SRGAN）
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>三维视觉：</strong>相机模型（针孔模型）、相机内外参、相机标定（张正友法）、对极几何、双目/多目深度估计
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>运动估计：</strong>光流（Lucas-Kanade）、FlowNet、PWC-Net
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                学习路径与每周计划（4 周建议）</h4>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 1 — 图像基础与传统图像处理</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>OpenCV 基础、图像滤波与边缘检测、颜色空间转换、直方图均衡
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>实现 Canny 边缘检测、Sobel 滤波、直方图均衡化</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点]
+                                            图像处理基础：</strong>图像直方图（灰度、彩色、累积）、直方图均衡化、图像几何变换（平移、仿射）、图像插值（最近邻、双线性）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 图像滤波：</strong>线性移不变系统
+                                        (LSIS)、卷积（可分离卷积核）、平滑滤波器（盒式、二项）、梯度滤波器（Sobel、Laplacian）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 边缘检测：</strong>Canny 边缘检测器（高斯滤波、非最大值抑制、滞后阈值化）
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 2 — 特征检测与匹配、相机模型</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>Harris / SIFT / ORB 特征、RANSAC、单应矩阵、相机成像模型
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>用 SIFT/ORB
+                                    做图像拼接（Homography）、实现张正友相机标定 demo</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 特征与匹配：</strong>模板匹配 (SSD, NCC)、图像金字塔、RANSAC、霍夫变换（直线/圆检测）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 特征点检测：</strong>角点（Harris 角点检测器）、SIFT（DoG 尺度空间）、SIFT 描述子（128
+                                        维）、二进制描述子 (ORB)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 相机参数：</strong>齐次坐标系、相机外参、相机内参。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 相机标定与对极几何：</strong>张正友标定法、PnP、对极几何（基础矩阵、本质矩阵、8点法）。
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 3 — 深度学习在 CV 的应用（分类 / 检测）</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>卷积基础、经典 CNN（ResNet）、目标检测框架（Faster R-CNN / YOLO / SSD）
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>用 PyTorch 训练 CIFAR-10，微调一个预训练
+                                    ResNet；尝试使用 YOLOv5 对小数据集微调</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] CV 核心任务：</strong>图像分类（AlexNet, VGG, ResNet, ViT, Swin-T）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 目标检测：</strong>R-CNN 系列（R-CNN, Fast R-CNN, Faster
+                                        R-CNN）、SSD、YOLO、评估指标 (mAP)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>ResNet 论文原文
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color);">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    Week 4 — 进阶：分割 / 深度估计 /运动估计</h5>
+                                <p style="margin-bottom: 0.8rem;">
+                                    <strong>学习：</strong>U-Net、DeepLab、Mask R-CNN；深度估计方法（单目/双目）
+                                </p>
+                                <p style="margin-bottom: 0.8rem;"><strong>实践：</strong>微调 U-Net 做简单医学影像分割或分割比赛数据集；用
+                                    FlowNet/PWC-Net 做光流可视化</p>
+                                <p style="margin-bottom: 0.5rem;"><strong>资源建议：</strong></p>
+                                <ul style="list-style: none; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 语义分割：</strong>FCN、U-Net、DeepLab（空洞卷积, ASPP）、PSPNet、HRNet、评估指标
+                                        (mIoU)。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 实例分割：</strong>Mask R-CNN（ROI Align）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 深度估计：</strong>结构光、ToF、单目深度估计（CNN 方法）、双目/多目深度估计（对极几何、Plane
+                                        Sweep、MVSNet）。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[知识点] 运动估计：</strong>运动场、光流（孔径问题）、Lucas-Kanade 方法、FlowNet、PWC-Net。
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>Faster R-CNN 论文
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>FCN 论文原文
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>Mask R-CNN 论文原文
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>MVSNet 论文
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: -1.5rem; color: var(--secondary-color);">•</span>
+                                        <strong>[资源] 论文：</strong>FlowNet 论文
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                项目建议（验收样例）</h4>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    1. 目标检测微调（YOLOv5/YOLOv8）</h5>
+                                <p style="margin-bottom: 0.5rem;"><strong>数据：</strong>自建小数据集或 COCO 子集</p>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>训练脚本、推理脚本、mAP 报表、预测可视化</p>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    2. 实例分割（Mask R-CNN）</h5>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>训练日志、mIoU/mAP、分割可视化</p>
+                            </div>
+
+                            <div
+                                style="background-color: #fff9e6; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #ffa500;">
+                                <h5
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem;">
+                                    3. 单目深度估计小 demo</h5>
+                                <p style="margin-bottom: 0;"><strong>交付：</strong>深度地图可视化、评估（如果有 ground truth）</p>
+                            </div>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                资源汇总（从原始导图逐条罗列）</h4>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>论文：</strong>ResNet, Faster R-CNN, FCN, Mask R-CNN, FlowNet, MVSNet
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>工具库：</strong>OpenCV、Detectron2、MMDetection、YOLO 家族、PyTorch/Torchvision
+                                </li>
+                                <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                    <span
+                                        style="position: absolute; left: 0; color: var(--accent-color); font-weight: bold;">•</span>
+                                    <strong>教程：</strong>PyTorch 官方教程、Papers With Code 对应实现
+                                </li>
+                            </ul>
+
+                            <h4
+                                style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 1.5rem 0 1rem 0;">
+                                验收要点（详尽）</h4>
+                            <div
+                                style="background-color: var(--light-gray); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        数据准备与说明（20）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        模型训练与日志（曲线、超参）（25）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        评估指标（mAP/mIoU/PSNR 等）（25）
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        工程与可复现性（代码结构、README、推理脚本）（20）
+                                    </li>
+                                    <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                        <span
+                                            style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">•</span>
+                                        可视化展示（10）
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 智能机器人 -->
+                <section id="robot" class="section">
+                    <h2 class="section-title">智能机器人</h2>
+                    <div class="section-content">
+                        <!-- xmind文件显示区域 -->
+                        <div
+                            style="margin: 24px 0; padding: 20px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div style="margin-bottom: 16px;">
+                                <h4
+                                    style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-sitemap" style="color: var(--accent-color);"></i>
+                                    <span>知识导图</span>
+                                </h4>
+                            </div>
+
+                            <!-- XMind 文件显示区域 - 自动检测图片是否存在 -->
+                            <div id="xmind-display-robot">
+                                <a href="./interactive/智能机器人.html"
+                                    style="background-color: white; padding: 16px; border-radius: 8px; border: 1px solid #ddd; display: block; text-decoration: none; transition: all 0.3s;"
+                                    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                                    onmouseout="this.style.boxShadow='none'">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div
+                                            style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                            <i class="fas fa-sitemap"></i>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px;">
+                                                智能机器人（点击进入交互版）
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--secondary-color); font-size: 20px;">
+                                            <i class="fas fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 内容区域预留 -->
+                        <!-- <div
+                            style="background-color: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0;">
+                            <p style="color: #888; font-style: italic;">内容区域预留 - 待添加详细内容</p>
+                        </div> -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

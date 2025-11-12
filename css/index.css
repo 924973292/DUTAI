@@ -1,0 +1,1947 @@
+ .jop1-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .jop1-file-list {
+            margin-bottom: 20px;
+        }
+
+        .jop1-file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border-left: 4px solid #FF9800;
+        }
+
+        .jop1-file-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #FF9800;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .jop1-file-name {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .jop1-file-date {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .jop1-file-action {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .jop1-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .jop1-section {
+            margin-bottom: 30px;
+        }
+
+        .jop1-section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+
+        .jop1-content {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .jop1-list {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .jop1-list-item {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .jop1-list-item:before {
+            content: "•";
+            color: #FF9800;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            margin-right: 8px;
+        }
+
+        .jop1-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .jop1-table th, .jop1-table td {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .jop1-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .jop1-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .jop1-note {
+            font-size: 14px;
+            color: #666;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #2196F3;
+        }
+
+        @media (max-width: 768px) {
+            .jop1-container {
+                padding: 20px;
+            }
+
+            .jop1-title {
+                font-size: 22px;
+            }
+
+            .jop1-section-title {
+                font-size: 16px;
+            }
+
+            .jop1-content, .jop1-list-item {
+                font-size: 15px;
+            }
+
+            .jop1-table th, .jop1-table td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+         /* 标题样式 */
+        .wio-week-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 任务列表样式 */
+        .wio-tasks {
+            margin-bottom: 20px;
+        }
+        
+        .wio-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .wio-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .wio-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .wio-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .wio-mandatory {
+            color: #e74c3c;
+        }
+        
+        .wio-optional {
+            color: #27ae60;
+        }
+        
+        /* 表格样式 */
+        .wio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .wio-table th, .wio-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .wio-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .wio-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .wio-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .wio-paper-name {
+            font-weight: 500;
+        }
+
+        /* 标题样式 */
+        .wiio-week-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 任务列表样式 */
+        .wiio-tasks {
+            margin-bottom: 20px;
+        }
+        
+        .wiio-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .wiio-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .wiio-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .wiio-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .wiio-mandatory {
+            color: #e74c3c;
+        }
+        
+        .wiio-optional {
+            color: #27ae60;
+        }
+        
+        /* 表格样式 */
+        .wiio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .wiio-table th, .wiio-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .wiio-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .wiio-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .wiio-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .wiio-paper-name {
+            font-weight: 500;
+        }
+        
+        /* 第九周特殊说明样式 */
+        .wiio-special-note {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+
+         /* 顶部标题样式 */
+        /* .wpo-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        } */
+        
+        .wpo-file-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .wpo-file-icon {
+            color: #ff7043;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .wpo-file-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .wpo-file-time {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 主要内容样式 */
+        .wpo-main-content {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 章节标题样式 */
+        .wpo-chapter-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 周标题样式 */
+        .wpo-week-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+            color: #3498db;
+        }
+        
+        /* 内容段落样式 */
+        .wpo-content-paragraph {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        /* 任务列表样式 */
+        .wpo-tasks {
+            margin-bottom: 20px;
+        }
+        
+        .wpo-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .wpo-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .wpo-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .wpo-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .wpo-mandatory {
+            color: #e74c3c;
+        }
+
+         /* 主要内容容器 */
+        .hio-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 通用任务标题样式 */
+        .hio-common-tasks-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        /* 通用任务列表样式 */
+        .hio-common-tasks-list {
+            list-style-type: none;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hio-common-tasks-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .hio-common-tasks-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .hio-mandatory {
+            color: #e74c3c;
+        }
+        
+        .hio-optional {
+            color: #27ae60;
+        }
+        
+        /* 周标题样式 */
+        .hio-week-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 思考问题样式 */
+        .hio-thought-question {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+        }
+        
+        /* 任务列表样式 */
+        .hio-tasks {
+            margin-bottom: 20px;
+        }
+        
+        .hio-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .hio-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .hio-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .hio-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+         /* 主要内容容器 */
+        .hilo-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 周标题样式 */
+        .hilo-week-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 学习目标列表样式 */
+        .hilo-learning-goals {
+            margin-bottom: 20px;
+        }
+        
+        .hilo-learning-goals-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .hilo-learning-goals-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .hilo-learning-goals-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        /* 任务列表样式 */
+        .hilo-tasks {
+            margin-bottom: 20px;
+        }
+        
+        .hilo-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .hilo-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .hilo-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .hilo-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .hilo-mandatory {
+            color: #e74c3c;
+        }
+        
+        .hilo-optional {
+            color: #27ae60;
+        }
+        
+        /* 代码块样式 */
+        .hilo-code {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.95em;
+        }
+          
+        /* 主要内容容器 */
+        .hilgo-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 周标题样式 */
+        .hilgo-week-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 分论文章节样式 */
+        .hilgo-paper-section {
+            margin-bottom: 25px;
+        }
+        
+        .hilgo-section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #2c3e50;
+        }
+        
+        .hilgo-requirements {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .hilgo-requirements-list {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+        
+        .hilgo-requirements-list li {
+            margin-bottom: 8px;
+        }
+        
+        /* 表格样式 */
+        .hilgo-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        
+        .hilgo-table th, .hilgo-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .hilgo-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .hilgo-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .hilgo-paper-name {
+            font-weight: 500;
+        }
+        
+        /* 任务列表样式 */
+        .hilgo-tasks {
+            margin-top: 30px;
+        }
+        
+        .hilgo-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .hilgo-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .hilgo-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .hilgo-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .hilgo-mandatory {
+            color: #e74c3c;
+        }
+        
+        .hilgo-optional {
+            color: #27ae60;
+        }
+
+
+          /* 主要内容容器 */
+        .asd-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 周标题样式 */
+        .asd-week-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 分论文章节样式 */
+        .asd-paper-section {
+            margin-bottom: 25px;
+        }
+        
+        .asd-section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .asd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        
+        .asd-table th, .asd-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .asd-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .asd-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .asd-paper-name {
+            font-weight: 500;
+        }
+        
+        /* 注释样式 */
+        .asd-note {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            border-left: 4px solid #3498db;
+        }
+        
+        /* 任务列表样式 */
+        .asd-tasks {
+            margin-top: 30px;
+        }
+        
+        .asd-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .asd-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .asd-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .asd-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .asd-mandatory {
+            color: #e74c3c;
+        }
+        
+        .asd-optional {
+            color: #27ae60;
+        }
+
+
+         /* 主要内容容器 */
+        .a1sd-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 通用任务标题样式 */
+        .a1sd-common-tasks-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        /* 通用任务列表样式 */
+        .a1sd-common-tasks-list {
+            list-style-type: none;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .a1sd-common-tasks-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .a1sd-common-tasks-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .a1sd-mandatory {
+            color: #e74c3c;
+        }
+        
+        .a1sd-optional {
+            color: #27ae60;
+        }
+        
+        /* 周标题样式 */
+        .a1sd-week-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 分论文章节样式 */
+        .a1sd-paper-section {
+            margin-bottom: 25px;
+        }
+        
+        .a1sd-section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .a1sd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        
+        .a1sd-table th, .a1sd-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .a1sd-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .a1sd-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .a1sd-paper-name {
+            font-weight: 500;
+        }
+        
+        /* 任务列表任务列表列表样式 */
+        .a1sd-tasks {
+            margin-top: 30px;
+        }
+        
+        .a1sd-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .a1sd-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .a1sd-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .a1sd-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+
+           /* 主要内容容器 */
+        .ajusd-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 周标题样式 */
+        .ajusd-week-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* 分论文章节样式 */
+        .ajusd-paper-section {
+            margin-bottom: 25px;
+        }
+        
+        .ajusd-section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .ajusd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        
+        .ajusd-table th, .ajusd-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .ajusd-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .ajusd-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .ajusd-paper-name {
+            font-weight: 500;
+        }
+        
+        /* 任务列表样式 */
+        .ajusd-tasks {
+            margin-top: 30px;
+        }
+        
+        .ajusd-task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .ajusd-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .ajusd-task-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .ajusd-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .ajusd-mandatory {
+            color: #e74c3c;
+        }
+        
+        .ajusd-optional {
+            color: #27ae60;
+        }
+
+         /* 主要内容容器 */
+        .agsd-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 任务列表样式 */
+        .agsd-tasks {
+            margin-bottom: 30px;
+        }
+        
+        .agsd-task-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .agsd-task-title:before {
+            content: "•";
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .agsd-task-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        .agsd-task-list li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .agsd-task-list li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .agsd-mandatory {
+            color: #e74c3c;
+        }
+        
+        .agsd-optional {
+            color: #27ae60;
+        }
+        
+        /* 论文精读列表样式 */
+        .agsd-paper-section {
+            margin-top: 40px;
+        }
+        
+        .agsd-paper-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .agsd-paper-title:before {
+            content: "★";
+            color: #f39c12;
+            margin-right: 8px;
+        }
+        
+        .agsd-paper-subtitle {
+            font-size: 16px;
+            color: #34495e;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .agsd-paper-category {
+            font-weight: 500;
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+            padding-left: 20px;
+        }
+        
+        .agsd-paper-category span {
+            font-weight: normal;
+            color: #7f8c8d;
+        }
+
+
+                /* 主要内容容器 */
+        .fd-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 表格样式 */
+        .fd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .fd-table th, .fd-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .fd-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .fd-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .fd-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .fd-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .fd-paper-desc {
+            color: #34495e;
+        }
+
+         /* 主要内容容器 */
+        .fnd-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .fnd-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        /* 表格样式 */
+        .fnd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .fnd-table th, .fnd-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .fnd-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .fnd-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .fnd-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .fnd-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .fnd-paper-desc {
+            color: #34495e;
+        }
+
+         
+        /* 主要内容容器 */
+        .fndk-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .fndk-main-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .fndk-main-title:before {
+            content: "•";
+            color: #3498db;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        /* 表格样式 */
+        .fndk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .fndk-table th, .fndk-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .fndk-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .fndk-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .fndk-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .fndk-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .fndk-paper-desc {
+            color: #34495e;
+        }
+
+
+          
+        /* 主要内容容器 */
+        .humg-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .humg-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .humg-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .humg-table th, .humg-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .humg-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .humg-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .humg-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .humg-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .humg-paper-desc {
+            color: #34495e;
+        }
+
+         /* 主要内容容器 */
+        .vg-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .vg-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .vg-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vg-table th, .vg-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vg-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .vg-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .vg-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .vg-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .vg-paper-desc {
+            color: #34495e;
+        }
+
+         /* 主要内容容器 */
+        .vgm-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .vgm-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .vgm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vgm-table th, .vgm-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vgm-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .vgm-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .vgm-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .vgm-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .vgm-paper-desc {
+            color: #34495e;
+        }
+
+          /* 主要内容容器 */
+        .vbgm-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .vbgm-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .vbgm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vbgm-table th, .vbgm-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vbgm-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .vbgm-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .vbgm-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .vbgm-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .vbgm-paper-desc {
+            color: #34495e;
+        }
+
+         /* 主要内容容器 */
+        .vgbgm-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .vgbgm-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+        }
+        
+        /* 表格样式 */
+        .vgbgm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vgbgm-table th, .vgbgm-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vgbgm-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .vgbgm-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .vgbgm-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .vgbgm-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .vgbgm-paper-desc {
+            color: #34495e;
+        }
+
+
+         
+        /* 主要内容容器 */
+        .vgdbg-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .vgdbg-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .vgdbg-subtitle {
+            font-size: 16px;
+            color: #7f8c8d;
+            text-align: center;
+            margin: -20px 0 30px 0;
+        }
+        
+        /* 表格样式 */
+        .vgdbg-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vgdbg-table th, .vgdbg-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vgdbg-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .vgdbg-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .vgdbg-paper-name {
+            font-weight: 500;
+            color: #3498db;
+        }
+        
+        .vgdbg-paper-link {
+            color: #e74c3c;
+            font-style: italic;
+            text-decoration: none;
+        }
+        
+        .vgdbg-paper-link:hover {
+            text-decoration: underline;
+        }
+        
+        .vgdbg-paper-desc {
+            color: #34495e;
+        }
+
+         /* 主要内容容器 */
+        .vdfbg-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .vdfbg-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        /* 表格样式 */
+        .vdfbg-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vdfbg-table th, .vdfbg-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vdfbg-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .vdfbg-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .vdfbg-paper-name {
+            font-weight: 500;
+            color: #3498db;
+        }
+        
+        .vdfbg-paper-link {
+            color: #e74c3c;
+            font-style: italic;
+            text-decoration: none;
+        }
+        
+        .vdfbg-paper-link:hover {
+            text-decoration: underline;
+        }
+        
+        .vdfbg-paper-desc {
+            color: #34495e;
+        }
+
+         
+        /* 主要内容容器 */
+        .vhg-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        .vhg-main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        /* 表格样式 */
+        .vhg-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .vhg-table th, .vhg-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vhg-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .vhg-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .vhg-paper-name {
+            font-weight: 500;
+            color: #3498db;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .vhg-paper-year {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .vhg-paper-desc {
+            color: #34495e;
+        }
+
+           
+        /* 主要内容容器 */
+        .okn-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+        
+        /* 表格样式 */
+        .okn-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-width: 1000px;
+        }
+        
+        .okn-table th, .okn-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+        }
+        
+        .okn-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .okn-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .okn-table tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        /* 阶段标题样式 */
+        .okn-phase-title {
+            background-color: #bbdefb !important;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        /* 状态标签样式 */
+        .okn-status {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .okn-status-not-started {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        /* 任务类型样式 */
+        .okn-task-type {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        /* 负责人样式 */
+        .okn-owner {
+            color: #0d47a1;
+            font-weight: 500;
+        }
+        
+        /* 备注样式 */
+        .okn-remark {
+            color: #6d4c41;
+            font-style: italic;
+        }
+
+
+         /* 主要树容器 */
+        .vwbg-file-tree {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 根目录 */
+        .vwbg-root {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        /* 目录项 */
+        .vwbg-dir-item {
+            margin: 4px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s ease;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .vwbg-dir-item:hover {
+            background-color: #f0f7ff;
+        }
+        
+        /* 文件项 */
+        .vwbg-file-item {
+            margin: 4px 0;
+            display: flex;
+            align-items: center;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        /* 图标样式 */
+        .vwbg-icon {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+        
+        .vwbg-dir-icon {
+            color: #3498db;
+        }
+        
+        .vwbg-file-icon {
+            color: #95a5a6;
+        }
+        
+        /* 连接线 */
+        .vwbg-connector {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .vwbg-connector::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #e0e0e0;
+        }
+        
+        /* 展开/折叠按钮 */
+        .vwbg-toggle {
+            width: 16px;
+            height: 16px;
+            margin-right: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+        }
+        
+        .vwbg-toggle::before {
+            content: '┣';
+            font-size: 14px;
+        }
+        
+        .vwbg-toggle.collapsed::before {
+            content: '┗';
+        }
+        
+        /* 隐藏内容 */
+        .vwbg-hidden {
+            display: none;
+        }
