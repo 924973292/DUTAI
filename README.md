@@ -7,9 +7,9 @@
 <p align="center">
   <a href="https://924973292.github.io/DUTAI/">
     <!-- 已经替换为有效的、颜色鲜艳的线上火箭图标 -->
-    <img src="https://www.svgrepo.com/show/474453/rocket.svg" alt="Launch Project" width="60" />
+    <img src="https://www.svgrepo.com/show/474453/rocket.svg" alt="Launch Project" width="260" />
     <br>
-    <img src="https://img.shields.io/badge/-%E7%82%B9%E5%87%BB%E8%BF%9B%E5%85%A5%E9%A1%B9%E7%9B%AE%E4%B8%BB%E9%A1%B5-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyTDIgMjFsMTAtNGwxMC0xOFoiLz48cGF0aCBkPSJNMjIgMmwtMTEgOWwxMS05eiIvPjwvc3ZnPg==" alt="点击进入项目主页">
+    <img src="https://img.shields.io/badge/-%E7%82%B9%E5%87%BB%E8%BF%9B%E5%85%A5%E9%A1%B9%E7%9B%AE%E4%B8%BB%E9%A1%B5-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyTDIgMjFsMTAtNGwxMC0xOFoiLz48cGF0aCBkPSJNMjIgMmwtMTEgOWwxMS05eiIvPjwvc3ZnPg==" alt="点击进入项目主页" width="360">
   </a>
 </p>
 
