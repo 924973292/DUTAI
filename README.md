@@ -1,7 +1,4 @@
 # 大连理工大学 - 科研启动计划 (DUT AI Starter Plan)
-
-欢迎来到大连理工大学科研启动计划项目！
-
 <br>
 
 <p align="center">
