@@ -5,8 +5,23 @@
 <br>
 
 <p align="center">
-  <a href="https://924973292.github.io/DUTAI/" style="text-decoration:none;">
-    <img src="https://img.shields.io/badge/-%F0%9F%9A%80%20%E7%82%B9%E5%87%BB%E8%BF%9B%E5%85%A5%E9%A1%B9%E7%9B%AE%E4%B8%BB%E9%A1%B5-3399FF?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC42NzEgMy4xNDI4MkMyMC4zMjM0IDIuNzMxODkgMjEuNzgzNyA0LjE4OTI0IDIxLjM0MzggNS44MzY1M0wyMC4wMjc0IDExSDIzLjVDMjMuNzQ3NCAxMSAyMy45NDY3IDExLjI2NTQgMjMuODEzMyAxMS40NTI0TDMuODEzMyAyMi40NTI0QzMuNjQ2NjkgMjIuNjI3OCAzLjM4NjM4IDIyLjUxOTYgMy40MDI4NSAyMi4yODU4TDUuMDIyMDUgMTNIMi41QzIuMjAyNjMgMTMgMi4wMDMzIDEyLjczNDYgMi4xNzY3MSAxMi41NDc2TDE4LjY3MSAzLjE0MjgyWk02Ljg1NTgxIDEzTDEwIDE4LjgwNjFMOC4xNzgyOCAxNUg1LjVDNS4yMDQ4OCAxNSA0Ljk0Njk2IDE0Ljg3ODQgNC45MDMzMyAxNC42MTQxTDYuODU1ODEgMTNaTTguNDM2NjcgMTFMMTcuNzEyMSAzLjUxNjYyTDE4Ljk4NDIgOEg1Ljg2MTQ3QzUuNDg3MTIgOCA1LjE5MTEgOC4yNTM3OCA1LjIyMDUgOC42MjM3N0w4LjQzNjY3IDExWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="点击进入项目主页" />
+  <a href="https://924973292.github.io/DUTAI/" style="text-decoration: none;">
+    <div style="
+      display: inline-block;
+      padding: 18px 35px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      background: linear-gradient(45deg, #0d6efd, #00aeff);
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid #ffffff44;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    ">
+      🚀 &nbsp; 点击进入项目主页 &nbsp; 🚀
+    </div>
   </a>
 </p>
 
